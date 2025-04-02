@@ -2,14 +2,32 @@ import Image from "next/image";
 import { AnilistProps, Recommendations } from "../types";
 import Link from "next/link";
 import { Add, Play, Save } from "./icons";
+import { ListProps, useStoreList } from "../store/store";
 
 export default function RenderCard({cardsData, recoms} : {cardsData? : AnilistProps[] | undefined, recoms? : Recommendations | undefined}) {
+
+    const {addToTheList, list, removeFromTheList} = useStoreList()
+    
+    function handleList(listItem : ListProps) {
+        const isItemInList = list.find(items => items.id === listItem.id)
+
+        if (isItemInList) {
+            removeFromTheList(listItem)
+        }else{
+            addToTheList(listItem)
+        }
+    }
+
+    function IsInTheList(id : number) {
+        return list.some(items => items.id === id)
+    }
+    
     return(
         <>
             {cardsData && cardsData?.map((items) => (
                 <li className="relative" key={items.id}>
-                    <Link href={`${items.id}`} className="grid gap-2 snap-start transition-all group/items-carousel">
-                        <Image 
+                    <div className="grid gap-2 snap-start transition-all group/items-carousel">
+                    <Image 
                         className="w-full aspect-[9/13] h-full object-cover 
                         transition-all 
                         duration-300 rounded-sm 
@@ -36,14 +54,16 @@ export default function RenderCard({cardsData, recoms} : {cardsData? : AnilistPr
                                         <p className="group-hover/hover-items:line-clamp-6 text-sm">{items.description?.replace(/<\/?(br|li|i|)>/g, '')}</p>
                                     </div>
                                 </div>
-                                <div className="hidden items-end gap-4 group-hover/hover-items:flex">
+                                <div className="hidden z-100 items-end gap-4 group-hover/hover-items:flex">
                                     <Play color="orange"/>
-                                    <Save color="orange"/>
+                                    <button onClick={() => handleList({id : items.id, chapters : items.episodes, image : items.bannerImage, title : items.title})}>
+                                        {IsInTheList(items.id) ? <Save color="red"/> : <Save color="orange"/>}
+                                    </button>
                                     <Add color="orange"/>
                                 </div>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 </li>
             ))} 
             {recoms && recoms.nodes.map(({mediaRecommendation}) => (

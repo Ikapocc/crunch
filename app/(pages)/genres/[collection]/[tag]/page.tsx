@@ -1,6 +1,4 @@
 
-"use client"
-
 import TagServer from "./tagServer"
 
 export default function Tag({params} : {params : {tag : string}}) {

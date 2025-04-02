@@ -2,7 +2,6 @@
 
 import { FiltersComp } from "@/app/components/filtersComponent"
 import Spinner from "@/app/components/spinner"
-import useChangeSizeHook from "@/app/hooks/useSizes"
 import { FetchSeriesByGenreTags } from "@/app/services/anilistFetching"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import Image from "next/image"
@@ -15,7 +14,6 @@ export default function TagServer({tag} : {tag : string}) {
     const [filterGenres, setFilterGenres] = useState<string[]>()
     const reference = useRef<HTMLDivElement | null>(null)
     const path = usePathname().split("/").slice(2).map(items => items.slice(0,1).toUpperCase() + items.slice(1)).join(" / ")
-    const {width} = useChangeSizeHook()
 
     const {data, isFetching, fetchNextPage} = useInfiniteQuery({
         queryKey : ["tag_query"],

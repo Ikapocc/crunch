@@ -21,12 +21,10 @@ export function Save({color} : {color : string}) {
 
 export function Account() {
     return(
-        <a href="/">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="white" width={23} viewBox="0 0 24 24" data-t="user-settings-svg" aria-labelledby="user-settings-svg" aria-hidden="true" role="img">
-                <title id="user-settings-svg">Menú de la cuenta</title><path d="M12 20a6.01 6.01 0 0 1-5.966-5.355L12 12.088l5.966 2.557A6.01 6.01 0 0 1 12 20m0-16c1.654 0 3 1.346 3 3s-1.345 3-2.999 3h-.002A3.003 3.003 0 0 1 9 7c0-1.654 1.346-3 3-3m7.394 9.081l-4.572-1.959A4.997 4.997 0 0 0 17 7c0-2.757-2.243-5-5-5S7 4.243 7 7c0 1.71.865 3.22 2.178 4.122l-4.572 1.959A.999.999 0 0 0 4 14c0 4.411 3.589 8 8 8s8-3.589 8-8c0-.4-.238-.762-.606-.919">
-                </path>
-            </svg>
-        </a>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="white" width={23} viewBox="0 0 24 24" data-t="user-settings-svg" aria-labelledby="user-settings-svg" aria-hidden="true" role="img">
+            <title id="user-settings-svg">Menú de la cuenta</title><path d="M12 20a6.01 6.01 0 0 1-5.966-5.355L12 12.088l5.966 2.557A6.01 6.01 0 0 1 12 20m0-16c1.654 0 3 1.346 3 3s-1.345 3-2.999 3h-.002A3.003 3.003 0 0 1 9 7c0-1.654 1.346-3 3-3m7.394 9.081l-4.572-1.959A4.997 4.997 0 0 0 17 7c0-2.757-2.243-5-5-5S7 4.243 7 7c0 1.71.865 3.22 2.178 4.122l-4.572 1.959A.999.999 0 0 0 4 14c0 4.411 3.589 8 8 8s8-3.589 8-8c0-.4-.238-.762-.606-.919">
+            </path>
+        </svg>
     )
 }
 
@@ -74,7 +72,7 @@ export function Options({color,witdh = 15} : {color : string, witdh : number }) 
 
 export function Filters() {
     return(
-        <svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} data-t="filter-svg" aria-labelledby="filter-svg" aria-hidden="true" role="img"><title id="filter-svg">Filtros / Opciones</title><path fill-rule="evenodd" d="M9 5c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2M3 8a1 1 0 0 1 0-2h2.142c.447-1.72 2-3 3.858-3s3.411 1.28 3.858 3H21a1 1 0 0 1 0 2h-8.142c-.447 1.72-2 3-3.858 3S5.589 9.72 5.142 8H3zm12 11c1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2 .897 2 2 2zm6-3a1 1 0 0 1 0 2h-2.142c-.447 1.72-2 3-3.858 3s-3.411-1.28-3.858-3H3a1 1 0 0 1 0-2h8.142c.447-1.72 2-3 3.858-3s3.411 1.28 3.858 3H21z">
+        <svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} data-t="filter-svg" aria-labelledby="filter-svg" aria-hidden="true" role="img"><title id="filter-svg">Filtros / Opciones</title><path fillRule="evenodd" d="M9 5c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2M3 8a1 1 0 0 1 0-2h2.142c.447-1.72 2-3 3.858-3s3.411 1.28 3.858 3H21a1 1 0 0 1 0 2h-8.142c-.447 1.72-2 3-3.858 3S5.589 9.72 5.142 8H3zm12 11c1.103 0 2-.897 2-2s-.897-2-2-2-2 .897-2 2 .897 2 2 2zm6-3a1 1 0 0 1 0 2h-2.142c-.447 1.72-2 3-3.858 3s-3.411-1.28-3.858-3H3a1 1 0 0 1 0-2h8.142c.447-1.72 2-3 3.858-3s3.411 1.28 3.858 3H21z">
             </path>
         </svg>
     )

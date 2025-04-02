@@ -1,6 +1,7 @@
 import { Play, Save } from "./icons";
 
 export default function StartButton() {
+        
     return(
         <div className='flex gap-3 z-20'>
             <button className='uppercase bg-[#F47535] text-black font-medium px-3 flex items-center gap-2 cursor-pointer'>

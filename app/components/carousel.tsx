@@ -50,7 +50,7 @@ export const AnimateCarousel = () => {
     }
 ]
 
-/*   useEffect(() => {
+  /* useEffect(() => {
       if (!isHoverSlide) {
         const interval = setInterval(() => {
           setTimer(prev => {

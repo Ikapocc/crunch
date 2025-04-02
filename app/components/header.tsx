@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Account, Save, Search } from "./icons";
 
 export default function Header() {
@@ -11,7 +12,9 @@ export default function Header() {
                 </ul>
                 <section className='flex separte-items'>
                     <Search />
-                    <Save color='white'/>
+                    <Link className="cursor-pointer" href={"/save"}>
+                        <Save color='white'/>
+                    </Link>
                     <Account />
                 </section>
             </nav>
