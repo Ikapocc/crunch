@@ -2,7 +2,12 @@ import { FetchingAnilist } from "../services/anilistFetching";
 import Cards from "./cards";
 
 export default async function CardsServer() {
-    const serverData = await FetchingAnilist()    
+    try {
 
-    return <Cards cardsData={serverData}/>
+        const serverData = await FetchingAnilist()    
+        return <Cards cardsData={serverData}/>
+    } catch (error) {
+        console.error("Error al obtener datos de AniList:", error);
+        return <p>No se pudieron cargar los datos de AniList.</p>;
+    }
 }

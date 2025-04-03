@@ -98,6 +98,7 @@ export interface MediaRecommendation {
     genres:      string[];
     seasonYear:  number;
     meanScore:   number;
+    episodes : number;
 }
 
 export interface Title {

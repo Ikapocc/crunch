@@ -1,4 +1,4 @@
-import { AnilistExtendedProps, AnilistListExtendedProps, AnilistProps, AnilistPropsById, AnilistRecomendationProps } from "../types";
+import { AnilistListExtendedProps, AnilistProps, AnilistPropsById, AnilistRecomendationProps } from "../types";
 
 export async function FetchingAnilist() : Promise<AnilistProps[]> {
   
@@ -51,7 +51,8 @@ export async function FetchingAnilist() : Promise<AnilistProps[]> {
       headers: {
         "Content-Type": "application/json"
       },
-      body : JSON.stringify({query, variables})
+      body : JSON.stringify({query, variables}),
+      next : {revalidate : 3600}
     })
     
     const anilistData = await anilistFetch.json()
@@ -273,6 +274,7 @@ export async function FetchingRecommendationSeries({id} : {id : number}) : Promi
               extraLarge,
               large
             }
+            episodes
             genres
             seasonYear
             meanScore
