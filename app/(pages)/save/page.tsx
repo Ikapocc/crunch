@@ -1,21 +1,15 @@
 "use client"
 
 import { Delete, Favorite } from "@/app/components/icons";
+import UseClientRender from "@/app/hooks/useIsClientRender";
 import { useStoreList } from "@/app/store/store"
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function Page() {
     
     const {list, removeFromTheList} = useStoreList()
-    const [isClient, setIsClient] = useState(false)
- 
-    useEffect(() => {
-        setIsClient(true)
-    }, [])
-
-    console.log(list);
+    const {isClient} = UseClientRender()
     
     return(
         <div className="flex flex-col gap-5 max-w-[60rem] mx-auto max-lg:px-12 py-20">
