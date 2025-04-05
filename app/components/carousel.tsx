@@ -50,7 +50,7 @@ export const AnimateCarousel = () => {
     }
 ]
 
-  /* useEffect(() => {
+  useEffect(() => {
       if (!isHoverSlide) {
         const interval = setInterval(() => {
           setTimer(prev => {
@@ -73,7 +73,7 @@ export const AnimateCarousel = () => {
         }
       }
       
-    }, [temporalData.length, isHoverSlide]) */
+    }, [temporalData.length, isHoverSlide])
 
   useEffect(() => {
     actualIndexCarousel.current = activeCarousel

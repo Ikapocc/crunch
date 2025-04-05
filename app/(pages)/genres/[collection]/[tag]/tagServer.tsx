@@ -3,11 +3,11 @@
 import { FiltersComp } from "@/app/components/filtersComponent"
 import Spinner from "@/app/components/spinner"
 import { FetchSeriesByGenreTags } from "@/app/services/anilistFetching"
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 
 export default function TagServer({tag} : {tag : string}) {
 
@@ -15,7 +15,7 @@ export default function TagServer({tag} : {tag : string}) {
     const reference = useRef<HTMLDivElement | null>(null)
     const path = usePathname().split("/").slice(2).map(items => items.slice(0,1).toUpperCase() + items.slice(1)).join(" / ")
 
-    const {data, isFetching, fetchNextPage} = useInfiniteQuery({
+    const {data, isFetching, fetchNextPage, hasNextPage, isSuccess} = useSuspenseInfiniteQuery({
         queryKey : ["tag_query"],
         queryFn :({pageParam = 0}) => FetchSeriesByGenreTags({genre : tag, page : pageParam }),
         initialPageParam : 0,
@@ -23,6 +23,8 @@ export default function TagServer({tag} : {tag : string}) {
             return lastPage.pageInfo.hasNextPage ? lastPage.pageInfo.currentPage : undefined
         },
     })
+
+    console.log(data);
 
     const GenreCollection = [
         "Action",
@@ -46,7 +48,7 @@ export default function TagServer({tag} : {tag : string}) {
         "Thriller"
     ]
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!reference.current) return
 
         const observer = new IntersectionObserver(([entries]) => {
@@ -67,7 +69,7 @@ export default function TagServer({tag} : {tag : string}) {
                 observer.disconnect()
             }
         }
-    }, [fetchNextPage])
+    }, [fetchNextPage]) */
 
     function GetFilters(filters : Record<number, string>) {
         setFilterGenres(Object.values(filters).filter(items => items.length > 0));
@@ -107,9 +109,9 @@ export default function TagServer({tag} : {tag : string}) {
                             ))}
                         </ul> 
                     </div>
-                    {isFetching ? <Spinner /> : <></>}
                     <div ref={reference} className={`w-full h-16 flex items-center justify-center`}>
-                        More Content...
+                        {isFetching || filterData.length < 1 ? <Spinner /> : <></>}
+                        {hasNextPage && !isFetching ? <button onClick={() => fetchNextPage()}>More Content...</button> : <></>}
                     </div>
                 </div>
             </section>

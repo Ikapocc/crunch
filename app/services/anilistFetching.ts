@@ -348,8 +348,6 @@ export async function FetchingByInput({input} : {input : string}) : Promise<Anil
     })
   
     const data = await fetchingData.json()
-
-    console.log(data);
   
     return data.data.Page.media
 }

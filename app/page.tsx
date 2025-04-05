@@ -1,9 +1,11 @@
-import { useMemo } from "react"
+import {lazy, Suspense, useMemo } from "react"
 import Banners from "./components/banners"
-import CardsGenre from "./components/cardsByGenreServer"
-import CardsServer from "./components/cardsServer"
+/* import CardsGenre from "./components/cardsByGenreServer"
+ */import CardsServer from "./components/cardsServer"
 import { AnimateCarousel } from "./components/carousel"
 import SingleCardsServer from "./components/singleCardsServer"
+
+const CardsGenre = lazy(() => import("./components/cardsByGenreServer"))
 
 export interface carouselProps {
   logo : string,
@@ -31,15 +33,25 @@ export default function Home() {
       <AnimateCarousel />
       <CardsServer />
       <Banners image={banners.banner2}/>
-      <CardsGenre genreSerie={genres[numberOfGenres[0]]}/>
+      <Suspense fallback={<div>...Loading</div>}>
+        <CardsGenre genreSerie={genres[numberOfGenres[0]]}/>
+      </Suspense>
       <Banners image={banners.banner1}/>
-      <CardsGenre genreSerie={genres[numberOfGenres[1]]}/>
+      <Suspense fallback={<div>...Loading</div>}>
+        <CardsGenre genreSerie={genres[numberOfGenres[1]]}/>
+      </Suspense>
       <SingleCardsServer/>      
-      <CardsGenre genreSerie={genres[numberOfGenres[2]]}/>
-      <CardsGenre genreSerie={genres[numberOfGenres[3]]}/>
+      <Suspense fallback={<div>...Loading</div>}>
+       <CardsGenre genreSerie={genres[numberOfGenres[2]]}/> 
+      </Suspense>
+      <Suspense fallback={<div>...Loading</div>}>
+       <CardsGenre genreSerie={genres[numberOfGenres[3]]}/> 
+      </Suspense>
       <SingleCardsServer/>
       <SingleCardsServer/> 
-      <CardsGenre genreSerie={genres[numberOfGenres[4]]}/>
+      <Suspense fallback={<div>...Loading</div>}>
+       <CardsGenre genreSerie={genres[numberOfGenres[4]]}/> 
+      </Suspense>
       <SingleCardsServer/>
     </main>
   )

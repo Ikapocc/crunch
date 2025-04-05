@@ -1,9 +1,11 @@
 "use client"
 
-import { useRef } from "react";
+import { lazy, Suspense, useRef } from "react";
 import { AnilistProps, Recommendations } from "../types";
 import { ArrowBack, ArrowForward } from "./icons";
-import RenderCard from "./renderCards";
+/* import RenderCard from "./renderCards";
+ */
+const RenderCard = lazy(() => import("./renderCards"))
 
 function offsetValuesFunc(width : number) {
     
@@ -58,7 +60,9 @@ export default function Cards({cardsData, recoms} : {cardsData? : AnilistProps[]
             </div>
             <div ref={carouselSlideSeries} className="overflow-x-scroll scrollbar-hide">
                 <ul className="grid grid-flow-col auto-cols xl:pl-20 md:pl-10 sm:pl-8 pl-4 gap-5 w-[90%]">
-                    <RenderCard cardsData={cardsData} recoms={recoms}/>
+                    <Suspense fallback={<div>...Loading</div>}>
+                        <RenderCard cardsData={cardsData} recoms={recoms}/>
+                    </Suspense>
                 </ul>
             </div>
             <button onClick={MoveForwardCarousel} className="absolute flex justify-between right-0 z-10 ">

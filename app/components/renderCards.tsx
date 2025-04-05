@@ -7,6 +7,7 @@ import { Add, Play, Save } from "./icons";
 import { ListProps, useStoreList } from "../store/store";
 import { useEffect, useState } from "react";
 
+
 export default function RenderCard({cardsData, recoms} : {cardsData? : AnilistProps[] | undefined, recoms? : Recommendations | undefined}) {
 
     const {addToTheList, list, removeFromTheList} = useStoreList()
@@ -65,8 +66,8 @@ export default function RenderCard({cardsData, recoms} : {cardsData? : AnilistPr
                     </Link>
                     <div className="hidden absolute bottom-3 left-3 gap-4 group-hover/items-carousel:flex">
                         <Play color="orange"/>
-                        <button onClick={() => handleList({id : items.id, chapters : items.episodes, image : items.bannerImage ? items.bannerImage : items.coverImage.extraLarge, title : items.title})}>
-                        {isClient ? <Save color={`${IsInTheList(items.id) ? "orange" : "red"}`}/> : <></>}
+                        <button onClick={() => handleList({id : items.id, chapters : items.episodes, image : items.coverImage.extraLarge ? items.coverImage.extraLarge : items.bannerImage, title : items.title.english ? items.title.english : items.title.native})}>
+                        {isClient ? <Save color={`${IsInTheList(items.id) ? "red" : "orange"}`}/> : <></>}
                         </button>
                         <Add color="orange"/>
                     </div>

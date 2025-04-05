@@ -1,5 +1,9 @@
 
-import TagServer from "./tagServer"
+import { lazy, Suspense } from "react"
+import LoadingSkeleton from "./loading"
+import Spinner from "@/app/components/spinner"
+
+const TagServer = lazy(() => import("./tagServer"))
 
 export default function Tag({params} : {params : {tag : string}}) {
 
@@ -7,7 +11,9 @@ export default function Tag({params} : {params : {tag : string}}) {
 
     return(
         <main>
-            <TagServer tag={tag} />
+            <Suspense fallback={<Spinner />}>
+                <TagServer tag={tag} />
+            </Suspense>
         </main>
     )
 }
