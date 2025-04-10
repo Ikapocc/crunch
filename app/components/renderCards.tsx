@@ -8,7 +8,7 @@ import { ListProps, useStoreList } from "../store/store";
 import { useEffect, useState } from "react";
 
 
-export default function RenderCard({cardsData, recoms} : {cardsData? : AnilistProps[] | undefined, recoms? : Recommendations | undefined}) {
+export default function RenderCard({cardsData, recoms, props} : {cardsData? : AnilistProps[] | undefined, recoms? : Recommendations | undefined, props?: string}) {
 
     const {addToTheList, list, removeFromTheList} = useStoreList()
     const [isClient, setIsClient] = useState<boolean>(false)
@@ -34,7 +34,7 @@ export default function RenderCard({cardsData, recoms} : {cardsData? : AnilistPr
     return(
         <>
             {cardsData && cardsData?.map((items) => (
-                <li className="relative group/items-carousel min-h-full overflow-hidden" key={items.id}>
+                <li className={`relative group/items-carousel min-h-full overflow-hidden ${props}`} key={items.id}>
                     <Link href={`${items.id}`} className="grid gap-2 snap-start transition-all h-full">
                     <Image 
                         className="aspect-[9/13] object-cover 

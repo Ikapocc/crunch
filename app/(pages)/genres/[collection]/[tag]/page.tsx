@@ -1,6 +1,5 @@
 
 import { lazy, Suspense } from "react"
-import LoadingSkeleton from "./loading"
 import Spinner from "@/app/components/spinner"
 
 const TagServer = lazy(() => import("./tagServer"))

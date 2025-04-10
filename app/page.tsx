@@ -1,7 +1,6 @@
 import {lazy, Suspense, useMemo } from "react"
 import Banners from "./components/banners"
-/* import CardsGenre from "./components/cardsByGenreServer"
- */import CardsServer from "./components/cardsServer"
+import CardsServer from "./components/cardsServer"
 import { AnimateCarousel } from "./components/carousel"
 import SingleCardsServer from "./components/singleCardsServer"
 

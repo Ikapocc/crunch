@@ -1,13 +1,14 @@
 "use client"
 
 import { FiltersComp } from "@/app/components/filtersComponent"
-import Spinner from "@/app/components/spinner"
+/* import RenderCard from "@/app/components/renderCards"
+ */import Spinner from "@/app/components/spinner"
 import { FetchSeriesByGenreTags } from "@/app/services/anilistFetching"
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query"
-import Image from "next/image"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useMemo, useRef, useState } from "react"
+import { lazy, useMemo, useRef, useState } from "react"
+
+const RenderCard = lazy(() => import("@/app/components/renderCards"))
 
 export default function TagServer({tag} : {tag : string}) {
 
@@ -15,7 +16,7 @@ export default function TagServer({tag} : {tag : string}) {
     const reference = useRef<HTMLDivElement | null>(null)
     const path = usePathname().split("/").slice(2).map(items => items.slice(0,1).toUpperCase() + items.slice(1)).join(" / ")
 
-    const {data, isFetching, fetchNextPage, hasNextPage, isSuccess} = useSuspenseInfiniteQuery({
+    const {data, isFetching, fetchNextPage, hasNextPage} = useSuspenseInfiniteQuery({
         queryKey : ["tag_query"],
         queryFn :({pageParam = 0}) => FetchSeriesByGenreTags({genre : tag, page : pageParam }),
         initialPageParam : 0,
@@ -23,8 +24,6 @@ export default function TagServer({tag} : {tag : string}) {
             return lastPage.pageInfo.hasNextPage ? lastPage.pageInfo.currentPage : undefined
         },
     })
-
-    console.log(data);
 
     const GenreCollection = [
         "Action",
@@ -94,7 +93,7 @@ export default function TagServer({tag} : {tag : string}) {
                     <div className="flex flex-col relative px-12 gap-4 lg:max-w-[70rem] max-lg:w-full mx-auto">
                         <FiltersComp dataSelects={GenreCollection} tag={path} sendFilters={GetFilters}/>
                         <ul className="grid grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-4 max-md:grid-cols-3 relative overflow-x-scroll scrollbar-hide">
-                            {filterData?.map(items => (
+                            {/* {filterData?.map(items => (
                                 <li key={items.id} className="grid mx-3 text-xs relative group/genre-slide transition-all my-6">
                                     <div className="bg-[#141517] absolute inset-0 opacity-0 group-hover/genre-slide:opacity-90 "></div>
                                     <Link className="relative flex flex-col gap-6 group/genre-hover" href={`/${items.id}`} >
@@ -106,7 +105,8 @@ export default function TagServer({tag} : {tag : string}) {
                                         </div>
                                     </Link>
                                 </li>
-                            ))}
+                            ))} */}
+                            <RenderCard cardsData={filterData} props="flex flex-col mx-3 text-xs z-50 relative transition-all"/>
                         </ul> 
                     </div>
                     <div ref={reference} className={`w-full h-16 flex items-center justify-center`}>

@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
+  async redirects() {
+    return [{
+      source : "/genres",
+      destination : "/",
+      permanent : true
+    }]
+  },
+  images: {
       remotePatterns: [
         {
           protocol: "https",

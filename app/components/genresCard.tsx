@@ -1,13 +1,14 @@
 "use client"
 
 import Link from "next/link";
-import { AnilistPropsById } from "../types";
-import Image from "next/image";
-import { ArrowBack, ArrowForward } from "./icons";
-import { useRef, useState } from "react";
+import { Add, ArrowBack, ArrowForward, Play, Save } from "./icons";
+import { lazy, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { AnilistProps } from "../types";
 
-export default function GenresCard({data, title} : {data : AnilistPropsById[] | undefined, title : string}) {
+const RenderCard = lazy(() => import("./renderCards"))
+
+export default function GenresCard({data, title} : {data : AnilistProps[] | undefined, title : string}) {
 
     const windowMove = useRef<HTMLUListElement>(null)
     const path = usePathname()
@@ -61,19 +62,25 @@ export default function GenresCard({data, title} : {data : AnilistPropsById[] | 
                             <Link href={`${path}/${title.toLowerCase()}`}>Ver todo</Link>
                         </div>
                         <ul ref={windowMove} className="grid grid-flow-col auto-cols relative overflow-x-scroll scrollbar-hide z-30">
-                            {data?.map(items => (
+                            {/* {data?.map(items => (
                                 <li key={items.id} className="grid mx-3 text-xs z-50 relative group/genre-slide transition-all">
-                                    <div className="bg-[#141517] absolute inset-0 opacity-0 group-hover/genre-slide:opacity-90 "></div>
-                                    <Link className="relative flex flex-col gap-6 group/genre-hover" href={`/${items.id}`} >
+                                    <div className="bg-[#141517] absolute inset-0 opacity-0 group-hover/genre-slide:grid group-hover/genre-slide:opacity-90 "></div>
+                                    <Link className="relative flex flex-col gap-6" href={`/${items.id}`} >
                                         <Image className="w-auto object-cover mini-card-image -z-30" width={1920} height={500} src={items.coverImage.extraLarge} alt={`image for ${items.title.english}`}/>
-                                        <div className="mini-card-props flex flex-col gap-3 h-full line-clamp-6 group-hover/genre-hover:absolute group-hover/genre-hover:px-1 group-hover/genre-hover:py-3">
+                                        <div className="mini-card-props flex flex-col gap-3 h-full line-clamp-6 group-hover/genre-slide:absolute group-hover/genre-slide:px-1 group-hover/genre-slide:py-3">
                                             <p>{items.title.english}</p>
-                                            <span className="text-gray-500 flex group-hover/items-carousel:hidden">Sub | Dob</span>
-                                            <p className="hidden group-hover/genre-hover:block">{items.description.replace(/<\/?(br|li|i|)>/g, '')}</p>
+                                            <span className="text-gray-500 flex group-hover/genre-slide:hidden">Sub | Dob</span>
+                                            <p className="line-clamp-5">{items.description.replace(/<\/?(br|li|i|)>/g, '')}</p>
                                         </div>
                                     </Link>
+                                    <div className="flex gap-3">
+                                        <Play color="orange"/>
+                                        <Save color="orange"/>
+                                        <Add color="orange"/>
+                                    </div>
                                 </li>
-                            ))}
+                            ))} */}
+                            <RenderCard cardsData={data} props="grid mx-3 text-xs relative transition-all"/>
                         </ul> 
                     </div>
                 </div>
