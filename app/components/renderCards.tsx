@@ -7,12 +7,12 @@ import { Add, Play, Save } from "./icons";
 import { ListProps, useStoreList } from "../store/store";
 import { useEffect, useState } from "react";
 
-
 export default function RenderCard({cardsData, recoms, props} : {cardsData? : AnilistProps[] | undefined, recoms? : Recommendations | undefined, props?: string}) {
 
     const {addToTheList, list, removeFromTheList} = useStoreList()
     const [isClient, setIsClient] = useState<boolean>(false)
-
+    /* const {addToTheList, list, removeFromTheList} = useListContext() */
+    
     useEffect(() => {
         setIsClient(true)
     }, [])

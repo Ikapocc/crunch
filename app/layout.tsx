@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/header";
 import { Nunito } from 'next/font/google';
 import ReactQueryProvider from "./libs/tanstack";
+import { ProviderContext } from "./context/createContext";
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -38,10 +39,12 @@ export default function RootLayout({
       <body
         className={`${nunito.className} antialiased overflow-x-hidden bg-black text-white`}
       >
-      <ReactQueryProvider>
-        <Header />
-        {children}
-      </ReactQueryProvider>
+      <ProviderContext>
+        <ReactQueryProvider>
+          <Header />
+          {children}
+        </ReactQueryProvider>
+      </ProviderContext>
       </body>
     </html>
   );
