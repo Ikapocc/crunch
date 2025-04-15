@@ -6,12 +6,14 @@ import Link from "next/link";
 import { Add, Play, Save } from "./icons";
 import { ListProps, useStoreList } from "../store/store";
 import { useEffect, useState } from "react";
+import { useToastContext } from "../context/createToastContext";
 
 export default function RenderCard({cardsData, recoms, props} : {cardsData? : AnilistProps[] | undefined, recoms? : Recommendations | undefined, props?: string}) {
 
     const {addToTheList, list, removeFromTheList} = useStoreList()
     const [isClient, setIsClient] = useState<boolean>(false)
     /* const {addToTheList, list, removeFromTheList} = useListContext() */
+    const {showToast} = useToastContext()
     
     useEffect(() => {
         setIsClient(true)
@@ -22,8 +24,18 @@ export default function RenderCard({cardsData, recoms, props} : {cardsData? : An
 
         if (isItemInList) {
             removeFromTheList(listItem)
+            showToast({
+                message : "Eliminado a la lista",
+                title : listItem.title,
+                type : "added"
+            })
         }else{
             addToTheList(listItem)
+            showToast({
+                message : "Añadido a la lista",
+                title : listItem.title,
+                type : "remove"
+            })
         }
     }
 

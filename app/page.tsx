@@ -28,7 +28,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main>
+    <main className="relative">
       <AnimateCarousel />
       <CardsServer />
       <Banners image={banners.banner2}/>

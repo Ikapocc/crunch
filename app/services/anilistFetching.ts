@@ -15,7 +15,6 @@ export async function FetchingAnilist() : Promise<AnilistProps[]> {
         }
         media (
           type: ANIME
-          season: WINTER
           seasonYear: 2025
           averageScore_greater: 60
           sort: [SCORE_DESC]

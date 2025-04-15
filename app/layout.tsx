@@ -1,28 +1,15 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/header";
 import { Nunito } from 'next/font/google';
-import ReactQueryProvider from "./libs/tanstack";
+import ReactQueryProvider from "./libs/tanstackContext";
 import { ProviderContext } from "./context/createContext";
+import { ToastProvider } from "./context/createToastContext";
 
 const nunito = Nunito({
   subsets: ['latin'],
   weight: ['400','500','600','700'], 
 });
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -37,13 +24,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.className} antialiased overflow-x-hidden bg-black text-white`}
+        className={`${nunito.className} antialiased relative overflow-x-hidden bg-black text-white`}
       >
       <ProviderContext>
-        <ReactQueryProvider>
-          <Header />
-          {children}
-        </ReactQueryProvider>
+        <ToastProvider>
+          <ReactQueryProvider>
+            <Header />
+            {children}
+          </ReactQueryProvider>
+        </ToastProvider>
       </ProviderContext>
       </body>
     </html>
