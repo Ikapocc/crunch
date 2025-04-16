@@ -4,10 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { carouselProps } from "../page";
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import StartButton from "./buttonStart";
 import { ArrowBack, ArrowForward } from "./icons";
 import { Progress } from "@/components/ui/progress";
-
+import StartButton from "./buttonStart";
 
 export const AnimateCarousel = () => {
   
@@ -134,7 +133,7 @@ export const AnimateCarousel = () => {
                     className="grid grid-cols-12 gap-7 area-selector shadow-overlay shadow-overlay-bottom"> 
                     <Image className="absolute inset-0 -z-10 left-0 right-0 aspect-video w-full min-h-full object-cover lg:object-[100%_50%] object-[80%_50%]" quality={90} src={items.cover} alt="items test" width={1920} height={100} objectFit="cover" priority/>
                     <div className='grid hero-icon relative items-center'>
-                      <Image className="flex flex-col min-h-full min-w-f object-contain z-10" src={items.logo} alt="items logo" width={400} height={100} priority/>
+                      <Image className="flex flex-col min-h-full min-w-full object-contain z-10" src={items.logo} alt="items logo" width={400} height={100} priority/>
                     </div>
                     <div className='grid hero-options items-end justify-center h-full custom-rows gap-4 z-50 relative'>
                       <div className="relative grid gap-2">

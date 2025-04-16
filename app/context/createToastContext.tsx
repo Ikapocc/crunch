@@ -29,7 +29,7 @@ export const ToastProvider : React.FC<ContextProps> = ({children}) => {
                     type : ""
                 }
             })
-        }, 3500)
+        }, 3000)
     }
 
     return(

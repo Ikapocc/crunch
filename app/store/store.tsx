@@ -24,7 +24,7 @@ export const useStoreList = create<StoreProps>((set) => ({
         if (typeof window !== 'undefined') {
             LocalStorageSave("currentList", newList)
         }
-        
+
         return{
             list : newList
         }
@@ -32,7 +32,6 @@ export const useStoreList = create<StoreProps>((set) => ({
     removeFromTheList : (items) => set((state) => {
 
         const newList = state.list.filter(itemsFilter => itemsFilter.id !== items.id)
-
         if (typeof window !== 'undefined') {
             LocalStorageSave("currentList", newList)
         }

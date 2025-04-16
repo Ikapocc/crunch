@@ -3,7 +3,7 @@ import { Account, Save, Search } from "./icons";
 
 export default function Header() {
     return(
-        <header className="text-white sticky top-0 z-30 w-full">
+        <header className="text-white sticky top-0 z-[90] w-full">
             <nav className='flex justify-between py-4 bg-[#23252b] text-sm px-20 sticky'>
                 <ul className='flex separte-items'>
                     <li>Explorar</li>

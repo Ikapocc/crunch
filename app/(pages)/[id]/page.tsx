@@ -4,11 +4,14 @@ import { useQuery } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
 import Image from "next/image"
 import StartButton from "../../components/buttonStart"
-import { Add, Options, Share } from "../../components/icons"
+import { Add, Options, Play, Save, Share } from "../../components/icons"
 import { FetchingAnilistById, FetchingRecommendationSeries } from "../../services/anilistFetching"
 import Cards from "../../components/cards"
 import { useLayoutEffect, useRef, useState } from "react"
 import Link from "next/link"
+import { ListProps } from "@/app/context/createContext"
+import { useStoreList } from "@/app/store/store"
+import { useToastContext } from "@/app/context/createToastContext"
 
 export default function PageId() {
 
@@ -16,6 +19,8 @@ export default function PageId() {
     const [dynamicH, setDynamicH] = useState<number>(0)
     const refHeight = useRef<HTMLDivElement>(null)
     const params = useParams<{id : string}>()
+    const {addToTheList, list, removeFromTheList} = useStoreList()
+    const {showToast} = useToastContext()
 
     const {data : dataById, isLoading, isFetching} = useQuery({
         queryKey : ["Data_By_Id"],
@@ -45,6 +50,26 @@ export default function PageId() {
         queryKey : ["Data_Recommends"],
         queryFn : () => FetchingRecommendationSeries({id : Number(params.id)}),
     })
+
+    function handleSerie(serieData : ListProps) {
+        const isInTheList = list.find(items => items.id === serieData.id)
+
+        if (!isInTheList) {
+            addToTheList(serieData)
+            showToast({
+                message : "ha sido añadido a la lista",
+                title : serieData.title,
+                type : "added"
+            })
+        }else{
+            removeFromTheList(serieData)
+            showToast({
+                message : "ha sido eliminado a la lista",
+                title : serieData.title,
+                type : "remove"
+            })
+        }
+    }
     
     if (isLoading || isFetching) return "Loading..."
 
@@ -82,7 +107,19 @@ export default function PageId() {
                                     </div>
 
                                     <div className="flex gap-8">
-                                        <StartButton />
+                                        <div className='flex gap-3 z-20'>
+                                            <button className='uppercase bg-[#F47535] text-black font-medium px-3 flex items-center gap-2 cursor-pointer'>
+                                                <Play color="black"/> <p className='uppercase text-sm font-medium'>Comenzar a ver E1</p> 
+                                            </button>
+                                            <button onClick={() => handleSerie({
+                                                title : items.title.english ? items.title.english : items.title.native  ,
+                                                chapters : items.episodes,
+                                                id : items.id,
+                                                image : items.coverImage.extraLarge
+                                            })} className='border-4 border-[#F47521] border-solid p-[.45rem] cursor-pointer'>
+                                                <Save color='#F47521'/>
+                                            </button>
+                                        </div>
                                         <div className="flex gap-5">
                                             <Add color="orange" witdh={25}/>
                                             <Share color="orange" witdh={25}/>
