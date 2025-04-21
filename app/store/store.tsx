@@ -13,10 +13,8 @@ interface StoreProps {
     removeFromTheList : (items : ListProps) => void
 }
 
-const IsLocalStorage = GetLocalStorageKey("currentList")
-
 export const useStoreList = create<StoreProps>((set) => ({
-    list : IsLocalStorage.length > 1 ? IsLocalStorage : [],
+    list : GetLocalStorage(),
     addToTheList : (items) => set((state) => {
 
         const newList = [...state.list, items]
@@ -53,4 +51,11 @@ export function GetLocalStorageKey(key : string) {
 
     const local = localStorage.getItem(key)
     return JSON.parse(local!)
+}
+
+function GetLocalStorage() {
+    if (typeof window === undefined) return []
+
+    const IsLocalStorage = GetLocalStorageKey("currentList")
+    return IsLocalStorage.length > 1 ? IsLocalStorage : []
 }

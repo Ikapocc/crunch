@@ -4,6 +4,7 @@ import CardsServer from "./components/cardsServer"
 import { AnimateCarousel } from "./components/carousel"
 import SingleCardsServer from "./components/singleCardsServer"
 
+
 const CardsGenre = lazy(() => import("./components/cardsByGenreServer"))
 
 export interface carouselProps {

@@ -3,8 +3,7 @@
 import { lazy, Suspense, useRef } from "react";
 import { AnilistProps, Recommendations } from "../types";
 import { ArrowBack, ArrowForward } from "./icons";
-/* import RenderCard from "./renderCards";
- */
+
 const RenderCard = lazy(() => import("./renderCards"))
 
 function offsetValuesFunc(width : number) {

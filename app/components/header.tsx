@@ -1,7 +1,11 @@
 import Link from "next/link";
-import { Account, Save, Search } from "./icons";
+import { Account, LogOut, Save, Search } from "./icons";
+import { UserData } from "../libs/auth";
 
-export default function Header() {
+export default async function Header() {
+
+    const session = await UserData()
+        
     return(
         <header className="text-white sticky top-0 z-[90] w-full">
             <nav className='flex justify-between py-4 bg-[#23252b] text-sm px-20 sticky'>
@@ -15,7 +19,7 @@ export default function Header() {
                     <Link className="cursor-pointer" href={"/save"}>
                         <Save color='white'/>
                     </Link>
-                    <Account />
+                    {session?.user?.name ? <LogOut /> : <Account />}
                 </section>
             </nav>
         </header>

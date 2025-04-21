@@ -93,19 +93,6 @@ export default function TagServer({tag} : {tag : string}) {
                     <div className="flex flex-col relative px-12 gap-4 lg:max-w-[70rem] max-lg:w-full mx-auto">
                         <FiltersComp dataSelects={GenreCollection} tag={path} sendFilters={GetFilters}/>
                         <ul className="grid grid-cols-6 max-xl:grid-cols-5 max-lg:grid-cols-4 max-md:grid-cols-3 relative overflow-x-scroll scrollbar-hide">
-                            {/* {filterData?.map(items => (
-                                <li key={items.id} className="grid mx-3 text-xs relative group/genre-slide transition-all my-6">
-                                    <div className="bg-[#141517] absolute inset-0 opacity-0 group-hover/genre-slide:opacity-90 "></div>
-                                    <Link className="relative flex flex-col gap-6 group/genre-hover" href={`/${items.id}`} >
-                                        <Image className="w-auto object-cover mini-card-image -z-30" quality={90} width={1920} height={500} src={items.coverImage.extraLarge} alt={`image for ${items.title.english}`}/>
-                                        <div className="mini-card-props flex flex-col gap-3 h-full line-clamp-6 group-hover/genre-hover:absolute group-hover/genre-hover:px-1 group-hover/genre-hover:py-3">
-                                            <p>{items.title.english ? items.title.english : items.title.native}</p>
-                                            <span className="text-gray-500 flex group-hover/items-carousel:hidden">Sub | Dob</span>
-                                            <p className="hidden group-hover/genre-hover:block">{items.description}</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))} */}
                             <RenderCard cardsData={filterData} props="flex flex-col mx-3 text-xs z-50 relative transition-all"/>
                         </ul> 
                     </div>
